@@ -5,19 +5,23 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --font-serif: "Playfair Display", Georgia, serif;
 
-  --color-forest: #5A5A40;
-  --color-sage: #A8B091;
-  --color-wheat: #F5F2ED;
+  /* Solid & Smooth Professional Palette */
+  --color-primary: #0f172a;    /* Slate 900 - Solid base */
+  --color-secondary: #059669;  /* Emerald 600 - Smooth green */
+  --color-forest: #0f172a;
+  --color-sage: #059669;
+  --color-wheat: #ffffff;
+  --color-background: #f8fafc; /* Slate 50 - Fresh bg */
 }
 
 @layer base {
   body {
-    @apply bg-wheat text-neutral-800 antialiased;
+    @apply bg-background text-slate-900 antialiased;
   }
 }
 
 .nature-card {
-  @apply bg-white rounded-[32px] border border-neutral-100 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md;
+  @apply bg-white rounded-[24px] border border-slate-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md;
 }
 
 .admin-row {

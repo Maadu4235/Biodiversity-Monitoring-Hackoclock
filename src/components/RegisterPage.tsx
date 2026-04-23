@@ -49,61 +49,61 @@ export const RegisterPage: React.FC = () => {
         className="w-full max-w-md nature-card p-10 space-y-8"
       >
         <div className="text-center space-y-4">
-          <div className="mx-auto w-12 h-12 bg-forest rounded-2xl flex items-center justify-center text-wheat">
+          <div className="mx-auto w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white">
             <Leaf size={28} />
           </div>
-          <h1 className="text-3xl font-serif italic text-forest">Enlist Network</h1>
-          <p className="text-neutral-500 text-sm">Join the global biodiversity monitoring collective.</p>
+          <h1 className="text-3xl font-serif italic text-slate-900">Enlist Network</h1>
+          <p className="text-slate-500 text-sm">Join the global biodiversity monitoring collective.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Biological Full Name</label>
+            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Biological Full Name</label>
             <input 
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-wheat/30 border border-neutral-100 focus:border-sage outline-none transition-all"
+              className="w-full p-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-secondary outline-none transition-all"
               placeholder="Dr. John Smith"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Registry Email</label>
+            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Registry Email</label>
             <input 
               type="email" 
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-wheat/30 border border-neutral-100 focus:border-sage outline-none transition-all"
+              className="w-full p-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-secondary outline-none transition-all"
               placeholder="jsmith@monitoring.org"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Security Cipher</label>
+            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Security Cipher</label>
             <input 
               type="password" 
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-wheat/30 border border-neutral-100 focus:border-sage outline-none transition-all"
+              className="w-full p-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-secondary outline-none transition-all"
               placeholder="••••••••"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Assignment Role</label>
+            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Assignment Role</label>
             <div className="flex gap-4">
               <button 
                 type="button"
                 onClick={() => setRole('User')}
-                className={`flex-1 py-3 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all ${role === 'User' ? 'bg-forest text-white border-forest' : 'bg-white text-forest border-neutral-100'}`}
+                className={`flex-1 py-3 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all ${role === 'User' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-900 border-slate-100'}`}
               >
                 Contributor
               </button>
               <button 
                 type="button"
                 onClick={() => setRole('Officer')}
-                className={`flex-1 py-3 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all ${role === 'Officer' ? 'bg-forest text-white border-forest' : 'bg-white text-forest border-neutral-100'}`}
+                className={`flex-1 py-3 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all ${role === 'Officer' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-900 border-slate-100'}`}
               >
                 Officer
               </button>
@@ -115,15 +115,15 @@ export const RegisterPage: React.FC = () => {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full btn-primary py-5 flex items-center justify-center gap-2"
+            className="w-full bg-primary text-white py-5 rounded-2xl flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-xl shadow-primary/10"
           >
             {loading ? <Loader2 className="animate-spin" /> : <UserPlus size={18} />}
             Synchronize Profile
           </button>
         </form>
 
-        <div className="text-center text-xs text-neutral-400">
-          Already verified? <Link to="/login" className="text-forest font-bold hover:underline">Establish Link</Link>
+        <div className="text-center text-xs text-slate-400">
+          Already verified? <Link to="/login" className="text-primary font-bold hover:underline">Establish Link</Link>
         </div>
       </motion.div>
     </div>

@@ -27,7 +27,12 @@ export interface Sighting {
   isDanger: boolean;
   status: SightingStatus;
   timestamp: string;
-  location: string; // Added location
+  location: string;
+  aiMetadata?: {
+    boundingBox?: [number, number, number, number]; // [ymin, xmin, ymax, xmax]
+    source: 'YOLO' | 'Gemini';
+    rawOutput?: string;
+  };
 }
 
 export interface Stats {

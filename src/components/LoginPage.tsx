@@ -46,33 +46,33 @@ export const LoginPage: React.FC = () => {
         className="w-full max-w-md nature-card p-10 space-y-8"
       >
         <div className="text-center space-y-4">
-          <div className="mx-auto w-12 h-12 bg-forest rounded-2xl flex items-center justify-center text-wheat">
+          <div className="mx-auto w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white">
             <Leaf size={28} />
           </div>
-          <h1 className="text-3xl font-serif italic text-forest">Portal Access</h1>
-          <p className="text-neutral-500 text-sm">Enter your credentials to access the monitoring grid.</p>
+          <h1 className="text-3xl font-serif italic text-slate-900">Portal Access</h1>
+          <p className="text-slate-500 text-sm">Enter your credentials to access the monitoring grid.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Registry Email</label>
+            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Registry Email</label>
             <input 
               type="email" 
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-wheat/30 border border-neutral-100 focus:border-sage outline-none transition-all"
+              className="w-full p-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-secondary outline-none transition-all"
               placeholder="officer@silva.gov"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Security Cipher</label>
+            <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Security Cipher</label>
             <input 
               type="password" 
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-wheat/30 border border-neutral-100 focus:border-sage outline-none transition-all"
+              className="w-full p-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-secondary outline-none transition-all"
               placeholder="••••••••"
             />
           </div>
@@ -82,15 +82,15 @@ export const LoginPage: React.FC = () => {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full btn-primary py-5 flex items-center justify-center gap-2"
+            className="w-full bg-primary text-white py-5 rounded-2xl flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-xl shadow-primary/10"
           >
             {loading ? <Loader2 className="animate-spin" /> : <LogIn size={18} />}
             Initialize Session
           </button>
         </form>
 
-        <div className="text-center text-xs text-neutral-400">
-          Digital verification required. <Link to="/register" className="text-forest font-bold hover:underline">Request Access</Link>
+        <div className="text-center text-xs text-slate-400">
+          Digital verification required. <Link to="/register" className="text-primary font-bold hover:underline">Request Access</Link>
         </div>
       </motion.div>
     </div>

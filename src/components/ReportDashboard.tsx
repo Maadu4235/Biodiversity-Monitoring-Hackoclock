@@ -25,50 +25,38 @@ export const ReportDashboard: React.FC<Props> = ({ sightings }) => {
   const locationData = Object.entries(locationCounts).map(([name, value]) => ({ name: name as string, value: value as number })).sort((a, b) => (b.value as number) - (a.value as number)).slice(0, 5);
   
   const pieData = [
-    { name: 'Danger', value: dangerAlerts, color: '#E11D48' },
-    { name: 'Safe', value: total - dangerAlerts, color: '#A8B091' }
+    { name: 'Danger', value: dangerAlerts, color: '#e11d48' },
+    { name: 'Safe', value: total - dangerAlerts, color: '#10b981' }
   ];
 
-  const COLORS = ['#5A5A40', '#A8B091', '#8B8B6B', '#DCDCD2', '#4A4A35'];
+  const COLORS = ['#0f172a', '#10b981', '#334155', '#34d399', '#64748b'];
 
   return (
-    <div className="space-y-12 pb-20">
+    <div className="space-y-12 pb-20 mt-8 text-slate-900">
       <div className="space-y-2">
-        <h1 className="text-5xl font-serif text-forest italic">Biometric Insights</h1>
-        <p className="text-neutral-500 text-sm">Zone 4B • Aggregate Biodiversity Metadata Analysis</p>
+        <h1 className="text-5xl font-serif text-slate-900 italic">WildEye Intelligence</h1>
+        <p className="text-slate-500 text-sm">Zone Monitoring • Precision Wildlife Analytics</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="nature-card p-10 flex flex-col items-center justify-center text-center space-y-3">
-          <div className="p-4 bg-wheat text-forest rounded-full">
-            <History size={28} />
-          </div>
-          <div>
-            <p className="text-5xl font-serif italic text-forest">{total}</p>
-            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Total Logs</p>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="nature-card p-8 flex flex-col items-center justify-center text-center space-y-2">
+          <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Total Sightings</p>
+          <p className="text-5xl font-serif italic text-slate-900">{total}</p>
         </div>
 
-        <div className="nature-card p-10 flex flex-col items-center justify-center text-center space-y-3">
-          <div className="p-4 bg-rose-50 text-rose-600 rounded-full">
-            <AlertCircle size={28} />
-          </div>
-          <div>
-            <p className="text-5xl font-serif italic text-rose-600">{dangerAlerts}</p>
-            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Threat Alerts</p>
-          </div>
+        <div className="nature-card p-8 flex flex-col items-center justify-center text-center space-y-2">
+          <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Locations</p>
+          <p className="text-5xl font-serif italic text-slate-900">{Object.keys(locationCounts).length}</p>
         </div>
 
-        <div className="nature-card p-10 flex flex-col items-center justify-center text-center space-y-3">
-          <div className="p-4 bg-wheat text-sage rounded-full">
-            <MapPin size={28} />
-          </div>
-          <div>
-            <p className="text-5xl font-serif italic text-forest">
-              {Object.keys(locationCounts).length}
-            </p>
-            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Active Nodes</p>
-          </div>
+        <div className="nature-card p-8 flex flex-col items-center justify-center text-center space-y-2">
+          <p className="text-[10px] uppercase font-bold tracking-widest text-rose-500">Critical Alerts</p>
+          <p className="text-5xl font-serif italic text-rose-600">{dangerAlerts}</p>
+        </div>
+
+        <div className="nature-card p-8 flex flex-col items-center justify-center text-center space-y-2">
+          <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Pending</p>
+          <p className="text-5xl font-serif italic text-slate-900">{sightings.filter(s => s.status === 'Pending').length}</p>
         </div>
       </div>
 
@@ -142,8 +130,8 @@ export const ReportDashboard: React.FC<Props> = ({ sightings }) => {
                 <div key={item.name} className="flex items-center gap-4">
                   <div className="w-4 h-4 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: item.color }}></div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">{item.name}</p>
-                    <p className="text-3xl font-serif italic text-forest">{((item.value / total || 0) * 100).toFixed(0)}%</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{item.name}</p>
+                    <p className="text-3xl font-serif italic text-slate-900">{((item.value / total || 0) * 100).toFixed(0)}%</p>
                   </div>
                 </div>
               ))}
