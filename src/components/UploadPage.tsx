@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Upload, Camera, AlertTriangle, CheckCircle2, Loader2, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Upload, Camera, AlertTriangle, CheckCircle2, Loader2, X, MapPin } from 'lucide-react';
 import { AnimalType, Sighting } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -10,10 +10,53 @@ interface Props {
 export const UploadPage: React.FC<Props> = ({ onUpload }) => {
   const [images, setImages] = useState<string[]>([]);
   const [selectedType, setSelectedType] = useState<AnimalType | ''>('');
+  const [location, setLocation] = useState('');
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [result, setResult] = useState<Sighting | null>(null);
 
   const animalTypes: AnimalType[] = ['Tiger', 'Elephant', 'Deer', 'Leopard', 'Human'];
+
+  const [locError, setLocError] = useState<string | null>(null);
+
+  const detectLocation = () => {
+    setIsDetectingLocation(true);
+    setLocError(null);
+    if (navigator.geolocation) {
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 15000, 
+        maximumAge: 0
+      };
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude.toFixed(6);
+          const lng = position.coords.longitude.toFixed(6);
+          setLocation(`${lat}, ${lng}`);
+          setIsDetectingLocation(false);
+          setLocError(null);
+        },
+        (error) => {
+          setIsDetectingLocation(false);
+          let msg = "Inaccessible";
+          if (error.code === error.PERMISSION_DENIED) msg = "Permissions Blocked";
+          else if (error.code === error.TIMEOUT) msg = "Connection Timeout";
+          setLocError(msg);
+          console.error("GPS Failure:", error);
+        },
+        options
+      );
+    } else {
+      setIsDetectingLocation(false);
+      setLocError("Not Supported");
+    }
+  };
+
+  // Auto-detect location on load
+  useEffect(() => {
+    detectLocation();
+  }, []);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []) as File[];
@@ -37,14 +80,17 @@ export const UploadPage: React.FC<Props> = ({ onUpload }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedType || images.length === 0) return;
+    if (!selectedType || images.length === 0 || !location) {
+      alert("Please provide images, taxonomy, and location.");
+      return;
+    }
 
     setIsUploading(true);
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ images, animalType: selectedType }),
+        body: JSON.stringify({ images, animalType: selectedType, location }),
       });
       const data = await response.json();
       setResult(data);
@@ -59,6 +105,7 @@ export const UploadPage: React.FC<Props> = ({ onUpload }) => {
   const reset = () => {
     setImages([]);
     setSelectedType('');
+    setLocation('');
     setResult(null);
   };
 
@@ -123,9 +170,36 @@ export const UploadPage: React.FC<Props> = ({ onUpload }) => {
               </div>
             </div>
 
+            <div className="space-y-6">
+              <label className="block text-[11px] font-bold uppercase tracking-widest text-neutral-400">Step 3: Geolocation Data</label>
+              <div className="relative">
+                <input 
+                  type="text" 
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder={
+                    isDetectingLocation 
+                      ? "Synchronizing with monitoring grid..." 
+                      : locError 
+                        ? `GPS Error: ${locError}. Please enter manually.`
+                        : "e.g. Mysore Road or coordinates"
+                  }
+                  className={`w-full p-4 pr-12 rounded-2xl bg-wheat/30 border border-neutral-100 focus:border-sage outline-none transition-all text-sm ${isDetectingLocation ? 'animate-pulse text-sage' : locError ? 'border-rose-200' : ''}`}
+                />
+                <button 
+                  type="button"
+                  onClick={detectLocation}
+                  disabled={isDetectingLocation}
+                  className={`absolute right-4 top-1/2 -translate-y-1/2 text-forest hover:scale-110 transition-transform ${isDetectingLocation ? 'animate-spin opacity-50' : ''}`}
+                >
+                  <MapPin size={20} />
+                </button>
+              </div>
+            </div>
+
             <button 
               type="submit" 
-              disabled={isUploading || !selectedType || images.length === 0}
+              disabled={isUploading || !selectedType || images.length === 0 || !location}
               className="w-full btn-primary py-5 flex items-center justify-center gap-2 shadow-xl shadow-forest/10"
             >
               {isUploading ? (
@@ -156,16 +230,23 @@ export const UploadPage: React.FC<Props> = ({ onUpload }) => {
               <p className="text-neutral-500 text-sm">Automated scan verified at <span className="font-bold text-forest">{result.confidenceScore}%</span> accuracy.</p>
             </div>
 
+            {result.isDanger && (
+              <div className="p-4 bg-rose-600 text-white rounded-2xl animate-pulse space-y-1">
+                <p className="text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                  <AlertTriangle size={14} /> Critical Warning
+                </p>
+                <p className="text-sm italic font-serif">Be careful during your journey. A dangerous animal was reported near your location.</p>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-10 py-6 border-y border-neutral-100">
               <div className="text-center">
                 <p className="text-[10px] uppercase text-neutral-400 font-bold tracking-widest mb-1">Detected Genus</p>
                 <p className="text-2xl font-serif italic text-forest">{result.detectedSpecies}</p>
               </div>
               <div className="text-center">
-                <p className="text-[10px] uppercase text-neutral-400 font-bold tracking-widest mb-1">Threat Level</p>
-                <p className={`text-2xl font-serif italic ${result.isDanger ? 'text-rose-600' : 'text-emerald-700'}`}>
-                  {result.isDanger ? 'High Priority' : 'System Safe'}
-                </p>
+                <p className="text-[10px] uppercase text-neutral-400 font-bold tracking-widest mb-1">Location Node</p>
+                <p className="text-xl font-serif italic text-forest truncate px-2">{result.location}</p>
               </div>
             </div>
 

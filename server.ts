@@ -2,7 +2,7 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
-import { Sighting, AnimalType, SightingStatus } from "./src/types";
+import { Sighting, AnimalType, SightingStatus, User } from "./src/types";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,8 +15,68 @@ async function startServer() {
 
   // In-memory storage
   const sightings: Sighting[] = [];
+  const users: User[] = [
+    { id: '1', email: 'officer@silva.gov', password: 'password123', role: 'Officer', name: 'Marcus Thorne', isApproved: true },
+    { id: '2', email: 'user@example.com', password: 'password123', role: 'User', name: 'John Doe' }
+  ];
 
-  // Helper for AI simulation
+  // Auth Routes
+  app.post("/api/auth/login", (req, res) => {
+    const { email, password } = req.body;
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    // Check if officer is approved
+    if (user.role === 'Officer' && user.isApproved === false) {
+      return res.status(403).json({ error: "Officer account is pending administrative approval." });
+    }
+
+    const { password: _, ...userWithoutPassword } = user;
+    res.json({ user: userWithoutPassword, token: "mock-jwt-token" });
+  });
+
+  app.post("/api/auth/register", (req, res) => {
+    const { email, password, name, role } = req.body;
+    if (users.find(u => u.email === email)) {
+      return res.status(400).json({ error: "User already exists" });
+    }
+    
+    const newUser: User = { 
+      id: Math.random().toString(36).substr(2, 9), 
+      email, 
+      password, 
+      name, 
+      role: role || 'User',
+      isApproved: role === 'Officer' ? false : undefined 
+    };
+    
+    users.push(newUser);
+    
+    if (newUser.role === 'Officer') {
+      return res.json({ message: "Officer account created. Awaiting administrative approval.", pending: true });
+    }
+
+    const { password: _, ...userWithoutPassword } = newUser;
+    res.json({ user: userWithoutPassword, token: "mock-jwt-token" });
+  });
+
+  // Admin Officer Management
+  app.get("/api/admin/officers", (req, res) => {
+    const officers = users.filter(u => u.role === 'Officer');
+    res.json(officers);
+  });
+
+  app.post("/api/admin/officers/:id/approve", (req, res) => {
+    const user = users.find(u => u.id === req.params.id && u.role === 'Officer');
+    if (!user) return res.status(404).json({ error: "Officer not found" });
+    user.isApproved = true;
+    res.json({ success: true, user });
+  });
+
+  // API Routes
   const getSimulatedDetection = (userSelectedType: AnimalType) => {
     const confidence = Math.floor(Math.random() * (99 - 85 + 1)) + 85; // 85% to 99%
     
@@ -37,10 +97,10 @@ async function startServer() {
   });
 
   app.post("/api/upload", (req, res) => {
-    const { images, animalType } = req.body;
+    const { images, animalType, location } = req.body;
     
-    if (!images || !animalType) {
-      return res.status(400).json({ error: "Missing images or animal type" });
+    if (!images || !animalType || !location) {
+      return res.status(400).json({ error: "Missing images, animal type, or location" });
     }
 
     const { detectedSpecies, confidenceScore, isDanger } = getSimulatedDetection(animalType);
@@ -53,7 +113,8 @@ async function startServer() {
       confidenceScore,
       isDanger,
       status: 'Pending',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      location
     };
 
     sightings.unshift(newSighting);

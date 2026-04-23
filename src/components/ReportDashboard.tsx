@@ -16,11 +16,17 @@ export const ReportDashboard: React.FC<Props> = ({ sightings }) => {
     return acc;
   }, {} as Record<string, number>);
 
+  const locationCounts = sightings.reduce((acc, s) => {
+    acc[s.location] = (acc[s.location] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
   const barData = Object.entries(typeCounts).map(([name, value]) => ({ name, value }));
+  const locationData = Object.entries(locationCounts).map(([name, value]) => ({ name: name as string, value: value as number })).sort((a, b) => (b.value as number) - (a.value as number)).slice(0, 5);
   
   const pieData = [
     { name: 'Danger', value: dangerAlerts, color: '#E11D48' },
-    { name: 'Safe', value: '#A8B091' }
+    { name: 'Safe', value: total - dangerAlerts, color: '#A8B091' }
   ];
 
   const COLORS = ['#5A5A40', '#A8B091', '#8B8B6B', '#DCDCD2', '#4A4A35'];
@@ -59,9 +65,9 @@ export const ReportDashboard: React.FC<Props> = ({ sightings }) => {
           </div>
           <div>
             <p className="text-5xl font-serif italic text-forest">
-              {Object.keys(typeCounts).length}
+              {Object.keys(locationCounts).length}
             </p>
-            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Species Divergence</p>
+            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400">Active Nodes</p>
           </div>
         </div>
       </div>
@@ -89,9 +95,30 @@ export const ReportDashboard: React.FC<Props> = ({ sightings }) => {
         </div>
 
         <div className="nature-card p-10 space-y-8">
-          <h3 className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Risk Distribution</h3>
-          <div className="h-72 flex items-center justify-between">
-            <div className="w-1/2 h-full">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Top Hotspots</h3>
+          <div className="h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={locationData} layout="vertical">
+                <XAxis type="number" hide />
+                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} fontSize={9} width={80} tick={{ fill: '#A3A3A3' }} />
+                <Tooltip 
+                  cursor={{ fill: '#F5F2ED' }}
+                  contentStyle={{ borderRadius: '24px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', fontFamily: 'serif', fontStyle: 'italic' }}
+                 />
+                <Bar dataKey="value" radius={[0, 12, 12, 0]}>
+                  {locationData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="nature-card p-10 space-y-8 lg:col-span-2">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Risk Assessment</h3>
+          <div className="h-72 flex items-center justify-center gap-20">
+            <div className="w-1/3 h-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -110,7 +137,7 @@ export const ReportDashboard: React.FC<Props> = ({ sightings }) => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="w-1/2 space-y-6 pl-10">
+            <div className="space-y-6">
               {pieData.map(item => (
                 <div key={item.name} className="flex items-center gap-4">
                   <div className="w-4 h-4 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: item.color }}></div>

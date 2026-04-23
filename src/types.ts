@@ -1,3 +1,19 @@
+export type UserRole = 'User' | 'Officer';
+
+export interface User {
+  id: string;
+  email: string;
+  password?: string;
+  role: UserRole;
+  name: string;
+  isApproved?: boolean; // For Officers
+}
+
+export interface AuthResponse {
+  user: User;
+  token: string;
+}
+
 export type SightingStatus = 'Pending' | 'Approved' | 'Rejected';
 
 export type AnimalType = 'Tiger' | 'Elephant' | 'Deer' | 'Leopard' | 'Human';
@@ -11,6 +27,7 @@ export interface Sighting {
   isDanger: boolean;
   status: SightingStatus;
   timestamp: string;
+  location: string; // Added location
 }
 
 export interface Stats {

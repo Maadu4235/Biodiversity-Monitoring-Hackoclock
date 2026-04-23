@@ -1,6 +1,8 @@
 {
   "name": "EcoWatch: Biodiversity Monitor",
   "description": "A full-stack biodiversity monitoring application for tracking animal sightings with simulated AI species detection, admin verification, and real-time report dashboards.",
-  "requestFramePermissions": [],
+  "requestFramePermissions": [
+    "geolocation"
+  ],
   "majorCapabilities": []
 }
