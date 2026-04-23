@@ -24,7 +24,7 @@ async function startServer() {
   app.post("/api/auth/login", (req, res) => {
     const { email, password } = req.body;
     const user = users.find(u => u.email === email && u.password === password);
-    
+
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
@@ -43,18 +43,18 @@ async function startServer() {
     if (users.find(u => u.email === email)) {
       return res.status(400).json({ error: "User already exists" });
     }
-    
-    const newUser: User = { 
-      id: Math.random().toString(36).substr(2, 9), 
-      email, 
-      password, 
-      name, 
+
+    const newUser: User = {
+      id: Math.random().toString(36).substr(2, 9),
+      email,
+      password,
+      name,
       role: role || 'User',
-      isApproved: role === 'Officer' ? false : undefined 
+      isApproved: role === 'Officer' ? false : undefined
     };
-    
+
     users.push(newUser);
-    
+
     if (newUser.role === 'Officer') {
       return res.json({ message: "Officer account created. Awaiting administrative approval.", pending: true });
     }
@@ -79,7 +79,7 @@ async function startServer() {
   // API Routes
   const getSimulatedDetection = (userSelectedType: AnimalType) => {
     const confidence = Math.floor(Math.random() * (99 - 85 + 1)) + 85; // 85% to 99%
-    
+
     // Danger logic
     const dangerTypes: AnimalType[] = ['Tiger', 'Leopard', 'Elephant', 'Human'];
     const isDanger = dangerTypes.includes(userSelectedType);
@@ -98,7 +98,7 @@ async function startServer() {
 
   app.post("/api/upload", (req, res) => {
     const { images, animalType, location } = req.body;
-    
+
     if (!images || !animalType || !location) {
       return res.status(400).json({ error: "Missing images, animal type, or location" });
     }
@@ -124,7 +124,7 @@ async function startServer() {
   app.post("/api/sightings/:id/status", (req, res) => {
     const { id } = req.params;
     const { status } = req.body; // 'Approved' | 'Rejected'
-    
+
     const sighting = sightings.find(s => s.id === id);
     if (!sighting) {
       return res.status(404).json({ error: "Sighting not found" });
