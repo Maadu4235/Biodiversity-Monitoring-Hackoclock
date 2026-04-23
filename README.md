@@ -4,7 +4,7 @@ This project is a full-stack Biodiversity Monitoring System designed to help tra
 
 The system connects users, forest officers, and data analytics into a single platform for better environmental monitoring and safety.
 
-<h4> Problem Statement</h4>
+<h3> Problem Statement</h3>
 Wildlife sightings are often unstructured and unverified, leading to:
 
 Incorrect data collection
@@ -13,7 +13,7 @@ Lack of real-time alerts
 
 Poor coordination between public and forest authorities
 
-<h4>i. Our Solution</h4>
+<h3>i. Our Solution</h3>
 We built a platform where:
 
 Users can upload animal sightings
@@ -22,7 +22,7 @@ Forest officers verify the data
 
 The system generates alerts and reports
 
-<h4> ii. Tech Stack</h4>
+<h3> ii. Tech Stack</h3>
 Frontend
 React (Vite + TypeScript)
 
@@ -36,8 +36,8 @@ Express.js
 Tools
 Git & GitHub
 
-<h4>iii. Key Features</h4>
-<h4>iv. User Module</h4>
+<h3>iii. Key Features</h3>
+<h3>iv. User Module</h3>
 Upload animal images
 
 Add location of sighting
@@ -46,7 +46,7 @@ Get instant detection (simulated AI)
 
 Receive danger alerts
 
-<h4>v. Forest Officer Module</h4>
+<h3>v. Forest Officer Module</h3>
 View all uploaded sightings
 
 Approve / Reject data
@@ -55,7 +55,7 @@ View full image preview
 
 Maintain data accuracy
 
-<h4>vi. Authentication System</h4>
+<h3>vi. Authentication System</h3>
 User Registration & Login
 
 Role-based access:
@@ -66,7 +66,7 @@ Forest Officer
 
 Officer approval system (admin controlled)
 
-<h4>vii. Dashboard & Reports</h4>
+<h3>vii. Dashboard & Reports</h3>
 Total sightings
 
 Animal count
@@ -75,21 +75,21 @@ Danger alerts
 
 Location-based insights
 
-<h4>viii. Smart Alert System</h4>
+<h3>viii. Smart Alert System</h3>
 Detect dangerous animals (Tiger, Leopard)
 
 Notify users:
 
 “Be careful during your journey. A dangerous animal was reported near your location.”
 
-<h4>ix. Location Tracking</h4>
+<h3>ix. Location Tracking</h3>
 Users provide location during upload
 
 Helps track wildlife movement
 
 Improves report accuracy
 
-<h4>x.  System Workflow</h4>
+<h3>x.  System Workflow</h3>
 User Upload → Backend Storage → Officer Verification → Approved Data → Reports & Alerts
 ->How to Run the Project
 ->Frontend
@@ -100,7 +100,7 @@ npm run dev
 cd server
 npm install
 node server.js
-<h4>xi. Future Enhancements</h4>
+<h3>xi. Future Enhancements</h3>
 Real AI/ML model for animal detection
 
 Live GPS tracking
@@ -109,7 +109,7 @@ Push notifications
 
 Mobile app integration
 
-<h4>xii. Conclusion</h4>
+<h3>xii. Conclusion</h3>
 This system provides a real-world solution for biodiversity monitoring by combining:
 
 User participation
@@ -118,9 +118,9 @@ Officer validation
 
 Smart alerting
 
-<h4>xiii. Team members</h4>
-Mahadev A
-Vijayalaxmi K
-Poornima H
-Sumit K
+<h3>xiii. Team members</h3>
+Mahadev A<br>
+Vijayalaxmi K<br>
+Poornima H<br>
+Sumit K<br>
 
