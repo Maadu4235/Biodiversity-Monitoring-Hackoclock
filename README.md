@@ -26,6 +26,66 @@ Users can upload images or videos, and the system processes the input to identif
   <li>🌍 Promotes wildlife awareness</li>
 </ul>
 
+
+<h2>🚀 How to Run the Project</h2>
+
+<h3>📌 Prerequisites</h3>
+<ul>
+  <li>Python 3.8+</li>
+  <li>pip (Python package manager)</li>
+  <li>Git</li>
+</ul>
+
+---
+
+<h3>📥 Step 1: Clone the Repository</h3>
+
+<pre>
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+</pre>
+
+---
+
+<h3>📦 Step 2: Install Dependencies</h3>
+
+<pre>
+pip install -r requirements.txt
+</pre>
+
+---
+
+<h3>🤖 Step 3: Download YOLO Model</h3>
+
+<p>
+Download the YOLO model weights (e.g., YOLOv5 or YOLOv8) and place them inside the project directory.
+</p>
+
+---
+
+<h3>▶️ Step 4: Run the Application</h3>
+
+<pre>
+python app.py
+</pre>
+
+<p>
+The server will start at:
+</p>
+
+<pre>
+http://127.0.0.1:5000/
+</pre>
+
+---
+
+<h3>📤 Step 5: Use the Application</h3>
+
+<ul>
+  <li>Open the web interface in your browser</li>
+  <li>Upload an image or video</li>
+  <li>View detection results instantly</li>
+</ul>
 ---
 
 <h2>⚠️ Problem Statement</h2>
