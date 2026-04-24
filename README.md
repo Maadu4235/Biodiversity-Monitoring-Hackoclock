@@ -11,6 +11,63 @@ An intelligent web-based system that detects and identifies animals from images 
   <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-red">
 </p>
 
+
+
+<h2>🔑 API Configuration</h2>
+
+<p>
+This project may require an API key for certain features (e.g., external services or model access).
+</p>
+
+---
+
+<h3>📌 Step 1: Create a .env File</h3>
+
+<pre>
+touch .env
+</pre>
+
+---
+
+<h3>📌 Step 2: Add Your API Key</h3>
+
+<pre>
+API_KEY=your_api_key_here
+</pre>
+
+<p><b>⚠️ Do NOT share this file publicly.</b></p>
+
+---
+
+<h3>📌 Step 3: Access API Key in Code</h3>
+
+<pre>
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+api_key = os.getenv("API_KEY")
+print(api_key)
+</pre>
+
+---
+
+<h3>📌 Step 4: Install Required Package</h3>
+
+<pre>
+pip install python-dotenv
+</pre>
+
+---
+
+<h3>⚠️ Security Note</h3>
+
+<ul>
+  <li>Never upload your <code>.env</code> file to GitHub</li>
+  <li>Add <code>.env</code> to <code>.gitignore</code></li>
+  <li>Keep your API keys private</li>
+</ul>
 ---
 
 <h2>📌 Project Overview</h2>
