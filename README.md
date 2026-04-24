@@ -41,8 +41,8 @@ Users can upload images or videos, and the system processes the input to identif
 <h3>📥 Step 1: Clone the Repository</h3>
 
 <pre>
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Maadu4235/Biodiversity-Monitoring-Hackoclock
+cd Biodiversity-Monitoring-Hackoclock
 </pre>
 
 ---
