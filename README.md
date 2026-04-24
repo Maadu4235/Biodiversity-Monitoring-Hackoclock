@@ -1,83 +1,139 @@
-<div align="center">
+<h1 align="center">🌿 Wildlife Detection and Identification System Using YOLO</h1>
 
-  <img src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" alt="Biodiversity Monitoring App Banner" width="100%" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+<p align="center">
+An intelligent web-based system that detects and identifies animals from images and videos using deep learning.
+</p>
 
-  <br /><br />
+<p align="center">
+  <img src="https://img.shields.io/badge/YOLO-Object%20Detection-blue">
+  <img src="https://img.shields.io/badge/Python-Backend-yellow">
+  <img src="https://img.shields.io/badge/Flask-Web%20Framework-green">
+  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-red">
+</p>
 
-  <h1>🌿 Biodiversity Monitoring App</h1>
-  
-  <p>
-    <b>Run and deploy your AI Studio app with ease</b>
-  </p>
+---
 
-  <p>
-    This repository contains everything you need to run your app locally.
-  </p>
+<h2>📌 Project Overview</h2>
 
-  <p>
-    <a href="https://ai.studio/apps/7e030d2b-5d22-4d16-8909-caa96ac01645" target="_blank">
-      <img src="https://img.shields.io/badge/View_in-AI_Studio-blueviolet?style=for-the-badge&logo=google&logoColor=white" alt="View in AI Studio" />
-    </a>
-  </p>
+<p>
+This project is an <b>automated wildlife detection platform</b> powered by the YOLO object detection model.
+Users can upload images or videos, and the system processes the input to identify animals and display relevant information about detected species.
+</p>
 
+<ul>
+  <li>⚡ Reduces manual monitoring effort</li>
+  <li>📈 Improves response time in wildlife surveillance</li>
+  <li>🌍 Promotes wildlife awareness</li>
+</ul>
+
+---
+
+<h2>⚠️ Problem Statement</h2>
+
+<p>
+Wildlife monitoring systems generate large volumes of surveillance footage that require manual inspection.
+This process is:
+</p>
+
+<ul>
+  <li>⏳ Time-consuming</li>
+  <li>❌ Inefficient</li>
+  <li>⚠️ Prone to delayed detection</li>
+</ul>
+
+<p><b>Need:</b> An automated system that can detect and identify animals in real-time.</p>
+
+---
+
+<h2>💡 Proposed Solution</h2>
+
+<p>
+The system uses a trained <b>YOLO deep learning model</b> to detect animals from uploaded media files.
+</p>
+
+<ul>
+  <li>🐾 Detect animals in images/videos</li>
+  <li>🧠 Identify species accurately</li>
+  <li>📊 Display confidence score</li>
+  <li>📚 Provide additional animal information</li>
+</ul>
+
+---
+
+<h2>✨ Features</h2>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  <span>✅ Animal detection using YOLO</span><br>
+  <span>🖼️ Image upload support</span><br>
+  <span>🎥 Video upload support</span><br>
+  <span>⚡ Real-time detection</span><br>
+  <span>📊 Confidence score display</span><br>
+  <span>🎯 User-friendly UI</span><br>
+  <span>🗄️ Database storage support</span><br>
+  <span>📖 Wildlife information display</span>
 </div>
 
 ---
 
-<div align="center">
-  <h2>🚀 Run Locally</h2>
-  <p>Follow the instructions below to get your application up and running.</p>
-</div>
+<h2>⚙️ System Workflow</h2>
 
-### 📋 Prerequisites
+<ol>
+  <li>📤 User uploads an image or video</li>
+  <li>🧠 YOLO model processes the media</li>
+  <li>🐾 Animal is detected and classified</li>
+  <li>📊 Results are displayed</li>
+  <li>💾 Data is optionally stored in database</li>
+</ol>
 
-Ensure you have the following installed before proceeding:
-- <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js" style="vertical-align: middle;" /> **Node.js**
+---
 
-<br />
+<h2>🛠️ Tech Stack</h2>
 
-### 🛠️ Setup Instructions
+<h3>Frontend</h3>
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
 
-<details open>
-  <summary><b>📦 1. Install dependencies</b></summary>
-  <br/>
-  <blockquote>
-    Install all required packages by running the following command:
-  </blockquote>
-  
-  ```bash
-  npm install
-  ```
-</details>
+<h3>Backend</h3>
+<ul>
+  <li>Python</li>
+  <li>Flask / FastAPI</li>
+</ul>
 
-<details open>
-  <summary><b>🔑 2. Environment Variables</b></summary>
-  <br/>
-  <blockquote>
-    Set the <code>GEMINI_API_KEY</code> in your <a href=".env.local"><code>.env.local</code></a> file to your Gemini API key.
-  </blockquote>
+<h3>Machine Learning</h3>
+<ul>
+  <li>YOLO (You Only Look Once)</li>
+  <li>OpenCV</li>
+</ul>
 
-  ```bash
-  # .env.local
-  GEMINI_API_KEY="your_api_key_here"
-  ```
-</details>
+<h3>Database</h3>
+<ul>
+  <li>SQLite / MySQL</li>
+</ul>
 
-<details open>
-  <summary><b>🏃 3. Run the application</b></summary>
-  <br/>
-  <blockquote>
-    Start the development server to preview your app:
-  </blockquote>
+<h3>Tools</h3>
+<ul>
+  <li>VS Code</li>
+  <li>Git & GitHub</li>
+</ul>
 
-  ```bash
-  npm run dev
-  ```
-</details>
+---
 
-<br />
+<h2>📸 Future Enhancements</h2>
 
-<div align="center">
-  <hr style="width: 80%; border-top: 1px solid #ddd; margin: 30px auto;" />
-  <p>Built with ❤️ using AI Studio for <b>Hackoclock</b></p>
-</div>
+<ul>
+  <li>📱 Mobile app integration</li>
+  <li>🌐 Live camera feed detection</li>
+  <li>🔔 Alert system for dangerous animals</li>
+  <li>🗺️ GPS-based wildlife tracking</li>
+</ul>
+
+---
+
+<h2 align="center">🌟 Show Your Support</h2>
+
+<p align="center">
+If you like this project, give it a ⭐ on GitHub!
+</p>
