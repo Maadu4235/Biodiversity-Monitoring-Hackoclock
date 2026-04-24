@@ -1,66 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-serif: "Playfair Display", Georgia, serif;
-
-  /* Solid & Smooth Professional Palette */
-  --color-primary: #0f172a;    /* Slate 900 - Solid base */
-  --color-secondary: #059669;  /* Emerald 600 - Smooth green */
-  --color-forest: #0f172a;
-  --color-sage: #059669;
-  --color-wheat: #ffffff;
-  --color-background: #f8fafc; /* Slate 50 - Fresh bg */
 }
 
 @layer base {
   body {
-    @apply bg-background text-slate-900 antialiased;
+    @apply bg-[#020617] text-slate-300;
   }
 }
 
-.nature-card {
-  @apply bg-white rounded-[24px] border border-slate-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.admin-row {
-  @apply grid grid-cols-[1fr,2fr,1fr,1.5fr] items-center p-5 border-b border-neutral-50 hover:bg-wheat/50 transition-colors;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.btn-primary {
-  @apply bg-forest text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:opacity-90 active:scale-95 disabled:opacity-50;
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
 }
 
-.btn-outline {
-  @apply bg-white text-forest border border-forest px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:bg-forest hover:text-white;
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }
-
-.status-badge {
-  @apply px-3 py-1 text-[10px] font-bold uppercase rounded-full;
-}
-
-.status-pending {
-  @apply bg-amber-100 text-amber-700;
-}
-
-.status-approved {
-  @apply bg-emerald-100 text-emerald-700;
-}
-
-.status-rejected {
-  @apply bg-rose-100 text-rose-700;
-}
-
-.nav-link {
-  @apply flex items-center space-x-3 px-4 py-3 rounded-xl transition-all font-semibold tracking-wide uppercase text-xs;
-}
-
-.nav-link-active {
-  @apply bg-sage/20 text-wheat opacity-100;
-}
-
-.nav-link-inactive {
-  @apply opacity-60 hover:opacity-100 text-wheat;
-}
-
